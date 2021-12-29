@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from "react";
 import { Button, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import useLocalStorage from "use-local-storage";
 import "./Todolist.css"
 import axios from 'axios';
-// import useFirstRender from "./useFirstRender";
 
 const endpoint = "https://krat.es/3b999ff229cd56baf75b/";
 
@@ -55,20 +53,18 @@ function FormTodo({ addTodo }) {
 
 export const Todolist = (props) => {
 
-  // const isFirstRender = useFirstRender();
-
   const [todos, setTodos] = useState([
-    // id : "unique_id"
+    // id : "unique_id" - id is recieved only when fetched, so fetchData is required in all other functions
     // text : "task"
     // isDone : boolean value
   ])
 
   const addTodo = async (text) => {
 
-    // const newTodos = [...todos, { text }];
-    // setTodos(newTodos);
+    const newTodos = [...todos, { text }];
+    setTodos(newTodos);
 
-    const res = await axios.post(endpoint + `${props.title}`, {text, isDone:false})
+    await axios.post(endpoint + `${props.title}`, {text, isDone:false})
     console.log("Added :", text)
     
     fetchData();
@@ -81,7 +77,7 @@ export const Todolist = (props) => {
     setTodos(newTodos);
 
     const bool = newTodos[index].isDone;
-    const res = await axios.put(endpoint + `${id}`, {text, isDone:bool});
+    await axios.put(endpoint + `${id}`, {text, isDone:bool});
     console.log("updated :", text)
    
     fetchData();
@@ -93,7 +89,7 @@ export const Todolist = (props) => {
     newTodos.splice(index, 1);
     setTodos(newTodos);
 
-    const res = await axios.delete(endpoint + `record/${id}`);
+    await axios.delete(endpoint + `record/${id}`);
     console.log("deleted :", text)
 
     fetchData();
@@ -109,7 +105,7 @@ export const Todolist = (props) => {
     console.log("fetched", res.data)
   }
 
-  useEffect(() => {
+  useEffect( () => {
     
     fetchData();
   }, [])

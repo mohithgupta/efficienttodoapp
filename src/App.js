@@ -1,24 +1,15 @@
 import Heading from "./components/Heading";
 import "./App.css"
-// import useLocalStorage from "use-local-storage";
-// import Textarea from "./components/Textarea";
 import Todolist from "./components/Todolist";
-import { useState, useEffect } from "react";
-
-import {sendData} from "./components/Todolist" 
 
 function App() {
-
-  // const [dataToSend, setdataToSend] = useState([])
 
   return (
     <div className="App"> 
       
       <p className="landscape">Please Tilt your phone to use the app in Landscape Mode for better experience !!</p>
 
-      <div>
-        {/* <button className="savebtn">Save Data</button> */}
-      </div>
+      <div className="extra-gap"> </div>
      
       <div className="notinput" >
      
