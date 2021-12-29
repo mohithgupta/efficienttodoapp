@@ -1,33 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-html, body{
-    background-color: bisque !important;
-}
-
 .App{
     display: grid;
-    grid-template-columns: 1fr 3fr 3fr;
+    grid-template-columns: 0.8fr 3fr 3fr;
     grid-template-rows: 1fr 3fr 3fr;
-    height:98vh;
-    width:99.5vw;
+    height:100vh;
+    width:100vw; 
     gap:5px;
-    background-color: bisque;
+    background-color:#0f0e13;
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+      radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+      radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+      overflow: hidden;
 }
 
 div{
     overflow: hidden;
     text-align: center;
 }
-
-/* textarea{
-    width: 97%;
-    height:97%;
-    resize: none;
-    font-size: 1.5rem;
-    box-sizing: border-box;
-    padding: 10px;
-    line-height: 1.5;
-} */
 
 div.notinput{
     display: flex;
@@ -42,11 +33,16 @@ div.inputdiv{
 }
 
 .heading{
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: bold;
     font-family: 'Press Start 2P', cursive;
     color:rgb(255, 255, 255);
-    background-color: rgb(0, 140, 255);
+    background: rgb(39, 51, 89, 0.4);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     display: inline-block;
     border-radius: 8px;
     box-sizing: border-box;
@@ -58,7 +54,6 @@ div.inputdiv{
 }
 
 .heading-noturgent{
-    font-size: 1.5rem;
     white-space: nowrap;
     margin: 0 auto;
 }
@@ -91,15 +86,19 @@ div.inputdiv{
         display: none;
     }
     p{
-        font-size: 1.5rem;
+        font-size: 2.8rem;
         position: absolute;
         top:50%;
         margin: 0 auto;
-        font-family: 'Press Start 2P', cursive;
+        font-family: cursive;
         transform: translate(0,-50%);
-        background-color:rgb(235, 26, 26);
-        color:#fff;
-        /* width:95vw; */
+        background: rgb(39, 51, 89, 0.4);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(0, 0, 0, 0.5);
+        color:rgb(255, 0, 0);
         padding: 20px ;
     }
 }

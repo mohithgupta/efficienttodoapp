@@ -17,7 +17,7 @@ const Todo = ({ todo, index, markTodo, removeTodo }) => {
   return (
     <div style={flex} >
       <span 
-        style={{ textDecoration: todo.isDone ? "line-through" : ""}}
+        style={{ textDecoration: todo.isDone ? "line-through" : "", color:"#fff"}}
       >
         {todo.text}
       </span>
@@ -54,6 +54,8 @@ function FormTodo({ addTodo }) {
 export const Todolist = (props) => {
 
   const [todos, setTodos] = useState([
+    // Each todo has the following properties 
+
     // id : "unique_id" - id is recieved only when fetched, so fetchData is required in all other functions
     // text : "task"
     // isDone : boolean value

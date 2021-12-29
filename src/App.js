@@ -12,21 +12,15 @@ function App() {
       <div className="extra-gap"> </div>
      
       <div className="notinput" >
-     
         <Heading text="Important" className={["heading","heading-important"].join(" ")} />
-     
       </div>      
      
       <div className="notinput" >
-     
         <Heading text="Not Important" className={["heading","heading-notimportant"].join(" ")} /> 
-     
       </div>
       
       <div className="notinput" >
-     
         <Heading text="Urgent" className={["heading","heading-urgent"].join(" ")}/>
-      
       </div>
 
       <div className="inputdiv ">
@@ -47,7 +41,6 @@ function App() {
 
       <div className="notinput" >
         <Heading text="Not Urgent" className={["heading","heading-noturgent"].join(" ")} />     
-      
       </div>    
 
       <div className="inputdiv ">
