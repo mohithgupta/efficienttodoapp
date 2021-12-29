@@ -1,38 +1,105 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+html, body{
+    background-color: bisque !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App{
+    display: grid;
+    grid-template-columns: 1fr 3fr 3fr;
+    grid-template-rows: 1fr 3fr 3fr;
+    height:98vh;
+    width:99.5vw;
+    gap:5px;
+    background-color: bisque;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+div{
+    overflow: hidden;
+    text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* textarea{
+    width: 97%;
+    height:97%;
+    resize: none;
+    font-size: 1.5rem;
+    box-sizing: border-box;
+    padding: 10px;
+    line-height: 1.5;
+} */
+
+div.notinput{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.App-link {
-  color: #61dafb;
+div.inputdiv{
+    padding: 5px;
+    border: #000 solid 1px;
+    overflow-y: auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.heading{
+    font-size: 1.6rem;
+    font-weight: bold;
+    font-family: 'Press Start 2P', cursive;
+    color:rgb(255, 255, 255);
+    background-color: rgb(0, 140, 255);
+    display: inline-block;
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.heading-urgent, .heading-noturgent{
+    transform: rotateZ(270deg);
+}
+
+.heading-noturgent{
+    font-size: 1.5rem;
+    white-space: nowrap;
+    margin: 0 auto;
+}
+
+.heading-notimportant, .heading-important{
+    margin: auto 0;
+}
+
+@media screen and (max-width:900px) {
+    .App{
+        height:97.5vh;
+    }
+    .heading{
+        font-size: 1rem;
+        padding:10px;
+    }
+    .heading-noturgent{
+        white-space: normal;
+    }
+}
+
+@media screen and (orientation:landscape) {
+    .App>p{
+        display: none;
+    }
+}
+
+@media screen and (orientation:portrait) {
+    .App div{
+        display: none;
+    }
+    p{
+        font-size: 1.5rem;
+        position: absolute;
+        top:50%;
+        margin: 0 auto;
+        font-family: 'Press Start 2P', cursive;
+        transform: translate(0,-50%);
+        background-color:rgb(235, 26, 26);
+        color:#fff;
+        /* width:95vw; */
+        padding: 20px ;
+    }
 }

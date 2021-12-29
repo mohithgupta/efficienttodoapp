@@ -1,0 +1,23 @@
+.btn:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.btn:active{
+    outline: none;
+    box-shadow: none;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #777;
+    border-radius: 10px;
+}
+
+    /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
