@@ -1,15 +1,38 @@
 import Heading from "./components/Heading";
 import "./App.css"
 import Todolist from "./components/Todolist";
+import UserInput from "./components/UserInput";
+import useLocalStorage from "use-local-storage";
 
 function App() {
 
-  return (
-    <div className="App"> 
-      
-      <p className="landscape">Please Tilt your phone to use the app in Landscape Mode for better experience !!</p>
+  const [customId, setCustomId] = useLocalStorage("customId", 'absent');
 
-      <div className="extra-gap"> </div>
+  const handleChangeID = () => {
+
+    setCustomId('absent')
+  }
+
+  return (
+    <>
+    { customId==='absent' ? 
+    
+    <UserInput setCustomId={setCustomId} /> 
+
+    :
+
+    <div className="App"> 
+            
+       
+       <p className="landscape">Please Tilt your phone to use the app in Landscape Mode for better experience !!</p> 
+
+      <div className="changeId_div" onClick={handleChangeID}> 
+      
+      {/* Your Id : {customId} */}
+
+      <button className="changeId_btn"> Change My ID </button>  
+
+      </div>
      
       <div className="notinput" >
         <Heading text="Important" className={["heading","heading-important"].join(" ")} />
@@ -27,6 +50,7 @@ function App() {
       
         <Todolist 
           title="impurg"
+          customUserId={customId}
         />
       
       </div>
@@ -35,6 +59,7 @@ function App() {
       
         <Todolist 
           title="notimpurg"
+          customUserId={customId}
         />
       
       </div>
@@ -47,6 +72,7 @@ function App() {
         
         <Todolist 
           title="impnoturg"
+          customUserId={customId}
         />   
       
       </div>
@@ -55,11 +81,13 @@ function App() {
       
         <Todolist 
           title="notimpnoturg"
+          customUserId={customId}
         />
 
       </div>
     
-    </div>
+    </div>}
+    </>
   );
 }
 

@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Todolist.css"
 import axios from 'axios';
 
-const endpoint = "https://krat.es/3b999ff229cd56baf75b/";
 
 const flex={
   display :"flex",
@@ -29,7 +28,7 @@ const Todo = ({ todo, index, markTodo, removeTodo }) => {
   );
 }
 
-function FormTodo({ addTodo }) {
+const FormTodo = ({ addTodo }) => {
   const [value, setValue] = useState("");
 
   const handleSubmit = e => {
@@ -42,9 +41,9 @@ function FormTodo({ addTodo }) {
   return (
     <Form onSubmit={handleSubmit} style={flex}> 
     <Form.Group style={{width:"60%"}}>
-      <Form.Control type="text" className="input" value={value} onChange={e => setValue(e.target.value)} placeholder="Add a new task" />
+      <Form.Control type="text" className="input_task" value={value} onChange={e => setValue(e.target.value)} placeholder="Add a new task" />
     </Form.Group>
-    <Button variant="primary mb-3" type="submit">
+    <Button variant="primary mb-3" className="add_btn" type="submit">
       Add
     </Button>
   </Form>
@@ -52,6 +51,8 @@ function FormTodo({ addTodo }) {
 }
 
 export const Todolist = (props) => {
+
+  const endpoint = process.env.REACT_APP_BASEURL + props.customUserId + "/";
 
   const [todos, setTodos] = useState([
     // Each todo has the following properties 
@@ -63,7 +64,7 @@ export const Todolist = (props) => {
 
   const addTodo = async (text) => {
 
-    const newTodos = [...todos, { text }];
+    const newTodos = [{text }, ...todos];
     setTodos(newTodos);
 
     await axios.post(endpoint + `${props.title}`, {text, isDone:false})
@@ -74,14 +75,15 @@ export const Todolist = (props) => {
 
   const markTodo = async (id, index, text) => {
 
-    const newTodos = [...todos]
+    let newTodos = [...todos]
     newTodos[index].isDone= (newTodos[index].isDone ? (newTodos[index].isDone===true ? false : true) : true);
+    const bool = newTodos[index].isDone;
+   
     setTodos(newTodos);
 
-    const bool = newTodos[index].isDone;
     await axios.put(endpoint + `${id}`, {text, isDone:bool});
     console.log("updated :", text)
-   
+
     fetchData();
   };
 
@@ -102,9 +104,14 @@ export const Todolist = (props) => {
     const res = await axios.get(endpoint + `${props.title}`)
 
     if(res.status!==200) throw Error("Something's wrong")
-    else setTodos(res.data);
+  
+    const data = res.data;
 
-    console.log("fetched", res.data)
+    data.reverse();
+
+    setTodos(data)
+
+    console.log("fetched", data)
   }
 
   useEffect( () => {
