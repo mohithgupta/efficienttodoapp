@@ -3,26 +3,51 @@ import "./App.css"
 import Todolist from "./components/Todolist";
 import UserInput from "./components/UserInput";
 import useLocalStorage from "use-local-storage";
+import { confirm } from "react-confirm-box";
+
 
 function App() {
 
+  const [continueWithNoId, setContinueWithNoId] = useLocalStorage("continueWithNoId", 'no')
+
   const [customId, setCustomId] = useLocalStorage("customId", 'absent');
+    
+  const CustomConfirmBox = (message, onConfirm, onCancel) => {
+    return(
+      <div>
+          <p> {message} </p>
+          <button onClick={onConfirm}> Yes </button>
+          <button onClick={onCancel}> No </button>
+      </div>
+    )
+  }
 
-  const handleChangeID = () => {
+  const customRender = {
+    render: (message, onConfirm, onCancel) => {
+      return (
+        <CustomConfirmBox message={message} onConfirm={onConfirm} onCancel={onCancel} />
+      );
+    }
+  };
 
-    setCustomId('absent')
+  const handleChangeID = async (customRender)  => {  // need to change this for no ID
+
+      const result = await confirm("Are you sure??", customRender )
+      
+      result && setCustomId('absent')
+
+      result && setContinueWithNoId("no")
   }
 
   return (
     <>
-    { customId==='absent' ? 
+    { (customId==='absent' && continueWithNoId==='no') ? 
     
-    <UserInput setCustomId={setCustomId} /> 
+    <UserInput setCustomId={setCustomId} setContinueWithNoId={setContinueWithNoId} /> 
 
     :
 
-    <div className="App"> 
-            
+    <div className="App">             
        
        <p className="landscape">Please Tilt your phone to use the app in Landscape Mode for better experience !!</p> 
 
@@ -30,7 +55,7 @@ function App() {
       
       {/* Your Id : {customId} */}
 
-      <button className="changeId_btn"> Change My ID </button>  
+      <button className="changeId_btn"> {continueWithNoId==='no' ? "Change" : "Enter"} My ID </button>  
 
       </div>
      
@@ -50,7 +75,7 @@ function App() {
       
         <Todolist 
           title="impurg"
-          customUserId={customId}
+          customId={customId}
         />
       
       </div>
@@ -59,7 +84,7 @@ function App() {
       
         <Todolist 
           title="notimpurg"
-          customUserId={customId}
+          customId={customId}
         />
       
       </div>
@@ -72,7 +97,7 @@ function App() {
         
         <Todolist 
           title="impnoturg"
-          customUserId={customId}
+          customId={customId}
         />   
       
       </div>
@@ -81,7 +106,7 @@ function App() {
       
         <Todolist 
           title="notimpnoturg"
-          customUserId={customId}
+          customId={customId}
         />
 
       </div>

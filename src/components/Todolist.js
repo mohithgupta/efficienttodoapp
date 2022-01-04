@@ -1,76 +1,36 @@
-import React, {useState, useEffect} from "react";
-import { Button, Form } from 'react-bootstrap';
+import React, {useEffect} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Todolist.css"
 import axios from 'axios';
+import useLocalStorage from "use-local-storage";
+import FormTodo from "./FormTodo";
+import Todo from "./Todo";
 
 
-const flex={
-  display :"flex",
-  justifyContent:"space-around",
-  margin:"5px",
-}
+const Todolist = (props) => {
 
-const Todo = ({ todo, index, markTodo, removeTodo }) => {
+  const customId = props.customId;
 
-  return (
-    <div style={flex} >
-      <span 
-        style={{ textDecoration: todo.isDone ? "line-through" : "", color:"#fff"}}
-      >
-        {todo.text}
-      </span>
-      <div>
-        <Button className="btn" style={{margin:"3px"}} variant="outline-success" onClick={() => markTodo(todo._id, index, todo.text)}>{!todo.isDone ? "✓" : "Restore"}</Button>{' '}
-        <Button className="btn" variant="outline-danger" onClick={() => removeTodo(todo._id, index, todo.text)}>✕</Button>
-      </div>
-    </div>
-  );
-}
+  const endpoint = customId!=='absent' ? process.env.REACT_APP_BASEURL + customId + "/" : null;
 
-const FormTodo = ({ addTodo }) => {
-  const [value, setValue] = useState("");
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    if (!value) return;
-    addTodo(value);
-    setValue("");
-  };
-
-  return (
-    <Form onSubmit={handleSubmit} style={flex}> 
-    <Form.Group style={{width:"60%"}}>
-      <Form.Control type="text" className="input_task" value={value} onChange={e => setValue(e.target.value)} placeholder="Add a new task" />
-    </Form.Group>
-    <Button variant="primary mb-3" className="add_btn" type="submit">
-      Add
-    </Button>
-  </Form>
-  );
-}
-
-export const Todolist = (props) => {
-
-  const endpoint = process.env.REACT_APP_BASEURL + props.customUserId + "/";
-
-  const [todos, setTodos] = useState([
+  const [todos, setTodos] = useLocalStorage(`${props.title}`, [
     // Each todo has the following properties 
 
+    // id will be absent when using no ID option
     // id : "unique_id" - id is recieved only when fetched, so fetchData is required in all other functions
     // text : "task"
     // isDone : boolean value
-  ])
+  ]) 
 
   const addTodo = async (text) => {
 
     const newTodos = [{text }, ...todos];
     setTodos(newTodos);
 
-    await axios.post(endpoint + `${props.title}`, {text, isDone:false})
+    customId!=='absent' && (await axios.post(endpoint + `${props.title}`, {text, isDone:false}) )
     console.log("Added :", text)
     
-    fetchData();
+    customId!=='absent' && fetchData();
   };
 
   const markTodo = async (id, index, text) => {
@@ -81,10 +41,10 @@ export const Todolist = (props) => {
    
     setTodos(newTodos);
 
-    await axios.put(endpoint + `${id}`, {text, isDone:bool});
+    customId!=='absent' && (await axios.put(endpoint + `${id}`, {text, isDone:bool}) )
     console.log("updated :", text)
 
-    fetchData();
+    customId!=='absent' && fetchData();
   };
 
   const removeTodo = async (id, index, text) => {
@@ -93,10 +53,10 @@ export const Todolist = (props) => {
     newTodos.splice(index, 1);
     setTodos(newTodos);
 
-    await axios.delete(endpoint + `record/${id}`);
+    customId!=='absent' && (await axios.delete(endpoint + `record/${id}`) )
     console.log("deleted :", text)
 
-    fetchData();
+    customId!=='absent' && fetchData();
   };
 
   const fetchData = async () => {
@@ -116,7 +76,8 @@ export const Todolist = (props) => {
 
   useEffect( () => {
     
-    fetchData();
+    customId!=='absent' && fetchData();
+
   }, [])
 
   return (

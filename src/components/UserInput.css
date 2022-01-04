@@ -41,14 +41,29 @@ ul.main_list > li:nth-last-of-type(2){
 ul.main_list > li:last-of-type{
     list-style-type: "😈";
 }
+
 li > a{
     color:#fff;
+}
+
+li.no_id_li{
+    list-style-type: "😇";
+}
+
+li.imp_li{
+    list-style-type: "⭐";
+}
+li.imp_li > span {
+    color: rgba(255, 0, 0, 1);
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 .input_customid_div{
     display: grid;
     grid-template-columns: 3fr 1fr;
     align-content: center;
+    position: relative;   
 }
 
 .input_customid {
@@ -101,7 +116,42 @@ li > a{
     font-weight: bold;
 }
 
+.no_id_div{
+    position: absolute;
+    bottom: 2%;
+    left:50%;
+    transform: translateX(-50%);
+}
+
+.no_id_btn{
+    background: transparent;
+    color: rgba(35, 151, 245, 0.7);
+    text-decoration: underline;
+    border:none;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+.no_id_btn:hover{
+    color:#fff
+}
+.portfolio-link{
+    position: absolute;
+    top:1%;
+    right:50%;
+    transform: translateX(50%);
+    font-weight: bold;
+    z-index: 1;
+    color:rgba(255,255,255,0.8);
+}
+
+.portfolio-link:hover{
+    color:rgba(255, 255, 255, 1);
+    text-decoration: none;
+}
 @media screen and (max-width:900px) {
+    .userInput{
+        margin: 3px;
+    }
     .input_customid_div{
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr;   
