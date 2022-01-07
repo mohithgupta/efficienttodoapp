@@ -13,9 +13,9 @@ export const UserInput = (props) => {
 
         const name = prompt("I hope you are aware that your data will not sync across devices and it cannot be restored if you delete your browser memory and cookies!! \nPlease Provide Your Good Name:")
         if (name == null || name=="") return;
-        props.setContinueWithNoId(name)   
-        localStorage.customId && localStorage.removeItem("customId")    
         await axios.post(process.env.REACT_APP_NOIDDATA, name ? name : "unknown") 
+        localStorage.customId && localStorage.removeItem("customId")    
+        props.setContinueWithNoId(name)   
     }
 
     const handleSubmit = async (e) => {
@@ -26,8 +26,8 @@ export const UserInput = (props) => {
             return;
         }
         setPrevIdList(prevIdList => [...prevIdList, value])
-        props.setCustomId(value)
         await axios.post(process.env.REACT_APP_KRATEIDS, value)
+        props.setCustomId(value)
         setValue("");
     }
     
