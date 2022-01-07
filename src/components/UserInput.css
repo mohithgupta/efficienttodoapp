@@ -98,7 +98,7 @@ li.imp_li > span {
 .input_wrapper::after {
     content: "————————————————————";
     color:#fff;
-    line-height: .3em;
+    line-height: .4em;
     position: absolute;
     bottom:0;
     left: 0;
@@ -118,9 +118,10 @@ li.imp_li > span {
 
 .no_id_div{
     position: absolute;
-    bottom: 2%;
+    bottom: 5%;
     left:50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%);    
+    white-space: normal;
 }
 
 .no_id_btn{
@@ -130,6 +131,7 @@ li.imp_li > span {
     border:none;
     font-weight: bold;
     font-size: 1.1rem;
+    white-space: nowrap;
 }
 .no_id_btn:hover{
     color:#fff
@@ -148,6 +150,15 @@ li.imp_li > span {
     color:rgba(255, 255, 255, 1);
     text-decoration: none;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    transition: background-color 0s ease-in-out 500s;
+    -webkit-text-fill-color: #fff !important;
+}
+
 @media screen and (max-width:900px) {
     .userInput{
         margin: 3px;

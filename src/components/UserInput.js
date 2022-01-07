@@ -1,10 +1,13 @@
 import React, {useState} from 'react'
 import "./UserInput.css"
 import axios from 'axios'
+import useLocalStorage from 'use-local-storage'
 
 export const UserInput = (props) => {
 
     const [value, setValue] = useState("")
+
+    const [prevIdList, setPrevIdList] = useLocalStorage("prevIdList", [])
 
     const handleContinueWithNoId = async () => {
 
@@ -22,27 +25,61 @@ export const UserInput = (props) => {
             alert("ID should only consist of alphabets (can be both uppercase and lowercase) & numbers, and the length should be exactly 20 !!")
             return;
         }
+        setPrevIdList(prevIdList => [...prevIdList, value])
         props.setCustomId(value)
         await axios.post(process.env.REACT_APP_KRATEIDS, value)
         setValue("");
+    }
+    
+    const autocompleteMatch = (input) => {
+        if (input == '') {
+            return [];
+        }
+        var reg = new RegExp(input)
+            return prevIdList.filter(function(term) {
+                if (term.match(reg)) {
+                    return term;
+                }
+        });
+    }
+    
+    const showResults = (value) => {
+        
+        const res = document.getElementById("user_input_element");
+        res.innerHTML = '';
+        let list = '';
+        let terms = autocompleteMatch(value);
+
+        for (let i=0; i<terms.length; i++) 
+            list += '<li>' + terms[i] + '</li>';
+        
+        res.innerHTML = '<ul>' + list + '</ul>';
+    }
+
+    const handleChange = (e) => {
+        
+        setValue(e.target.value)
+        showResults()
     }
 
     return (
         <div>
             <a className="portfolio-link" href="https://mohithgupta.github.io" target="_blank" rel="noopener noreferrer">Designed By: Mohith Gupta </a>
 
-            <form onSubmit={handleSubmit} className="userInput" > 
+            <form onSubmit={handleSubmit} className="userInput" autoComplete='on'> 
             
                 <div className="input_customid_div" >
                     <div className="input_wrapper">
 
                     <input 
                         type="text"
+                        id="user_input_element"
                         value={props.value}
                         className="input_customid"  
-                        onChange={(e)=>setValue(e.target.value)} 
+                        onChange={handleChange} 
                         maxLength='20' 
                         placeholder="Enter Your Custom ID"
+                        autoComplete='on'
                     />
 
                     </div>
@@ -50,7 +87,7 @@ export const UserInput = (props) => {
                     <input type="submit" className="input_submit" value="Connect My ID"/> 
 
                     <div className='no_id_div'>
-                        <button type="button" className="no_id_btn" onClick={handleContinueWithNoId}>Continue with no ID ?</button>
+                        <button type="button" className="no_id_btn" onClick={handleContinueWithNoId}>Continue with no ID?</button>
                     </div>
                 </div>
 
