@@ -31,7 +31,7 @@ const Todolist = (props) => {
     customId!=='absent' && (await axios.post(endpoint + `${props.title}`, {text, isDone:false}) )
     console.log("Added :", text)
     
-    customId!=='absent' && fetchData();
+    // customId!=='absent' && fetchData();
   };
 
   const markTodo = async (id, index, text) => {
@@ -45,7 +45,7 @@ const Todolist = (props) => {
     customId!=='absent' && (await axios.put(endpoint + `${id}`, {text, isDone:bool}) )
     console.log("updated :", text)
 
-    customId!=='absent' && fetchData();
+    // customId!=='absent' && fetchData();
   };
 
   const removeTodo = async (id, index, text) => {
@@ -54,7 +54,7 @@ const Todolist = (props) => {
     customId!=='absent' && (await axios.delete(endpoint + `record/${id}`) )
     console.log("deleted :", text)
 
-    customId!=='absent' && fetchData();
+    // customId!=='absent' && fetchData();
    
     // const newTodos = [...todos];
     // newTodos.splice(index, 1);
