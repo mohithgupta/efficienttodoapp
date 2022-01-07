@@ -64,6 +64,7 @@ export const UserInput = (props) => {
 
     return (
         <div>
+            
             <a className="portfolio-link" href="https://mohithgupta.github.io" target="_blank" rel="noopener noreferrer">Designed By: Mohith Gupta </a>
 
             <form onSubmit={handleSubmit} className="userInput" autoComplete='on'> 
@@ -116,8 +117,15 @@ export const UserInput = (props) => {
                         </div>
 
                     </div>
-            
+                    <a href="https://www.producthunt.com/posts/an-efficient-to-do-app?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-an-efficient-to-do-app" target="_blank">
+                <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=325804&theme=light" 
+                alt="An Efficient To Do App! - You can Prioritze your tasks for Efficiency, with this App! | Product Hunt" 
+                style={{width: "250px", height: "54px"}} 
+                width="250"
+                height="54"/>
+            </a>
             </form>
+            
         </div>
     )
 }
