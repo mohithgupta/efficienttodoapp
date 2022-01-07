@@ -1,10 +1,11 @@
-import React, {useEffect} from "react";
+import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Todolist.css"
 import axios from 'axios';
 import useLocalStorage from "use-local-storage";
 import FormTodo from "./FormTodo";
 import Todo from "./Todo";
+import useInterval from "./useInterval"
 
 
 const Todolist = (props) => {
@@ -24,8 +25,8 @@ const Todolist = (props) => {
 
   const addTodo = async (text) => {
 
-    const newTodos = [{text }, ...todos];
-    setTodos(newTodos);
+    // const newTodos = [{text }, ...todos];
+    // setTodos(newTodos);
 
     customId!=='absent' && (await axios.post(endpoint + `${props.title}`, {text, isDone:false}) )
     console.log("Added :", text)
@@ -39,7 +40,7 @@ const Todolist = (props) => {
     newTodos[index].isDone= (newTodos[index].isDone ? (newTodos[index].isDone===true ? false : true) : true);
     const bool = newTodos[index].isDone;
    
-    setTodos(newTodos);
+    // setTodos(newTodos);
 
     customId!=='absent' && (await axios.put(endpoint + `${id}`, {text, isDone:bool}) )
     console.log("updated :", text)
@@ -49,14 +50,16 @@ const Todolist = (props) => {
 
   const removeTodo = async (id, index, text) => {
     
-    const newTodos = [...todos];
-    newTodos.splice(index, 1);
-    setTodos(newTodos);
-
+    
     customId!=='absent' && (await axios.delete(endpoint + `record/${id}`) )
     console.log("deleted :", text)
 
     customId!=='absent' && fetchData();
+   
+    // const newTodos = [...todos];
+    // newTodos.splice(index, 1);
+    // setTodos(newTodos);
+
   };
 
   const fetchData = async () => {
@@ -71,14 +74,10 @@ const Todolist = (props) => {
 
     setTodos(data)
 
-    console.log("fetched", data)
+    // console.log("fetched", data)
   }
 
-  useEffect( () => {
-    
-    customId!=='absent' && fetchData();
-
-  }, [])
+  useInterval( () => customId!=='absent' && fetchData(), 1000)
 
   return (
     <div className="app">

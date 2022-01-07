@@ -12,7 +12,7 @@ export const UserInput = (props) => {
     const handleContinueWithNoId = async () => {
 
         const name = prompt("I hope you are aware that your data will not sync across devices and it cannot be restored if you delete your browser memory and cookies!! \nPlease Provide Your Good Name:")
-        if (name == null || name=="") return;
+        if (name == null || name == "") return;
         await axios.post(process.env.REACT_APP_NOIDDATA, name ? name : "unknown") 
         localStorage.customId && localStorage.removeItem("customId")    
         props.setContinueWithNoId(name)   
