@@ -116,13 +116,13 @@ const Todolist = (props) => {
       }
       catch(error){
         console.log(error)
-        alert("The API has an issue but it would be temporary. Please try again after some time or use the Continue with No ID option for now!")
+        alert("The API is having an issue but it would be temporary. Please try again after some time or use the Continue with No ID option for now!")
       }
       finally{ }
     }
   }
 
-  // useInterval( () => customId!=='absent' && fetchData(), 1000)
+  useInterval( () => customId!=='absent' && fetchData(), 1000)
 
   useEffect(() => {
     fetchData()
