@@ -9,16 +9,16 @@ export const UserInput = (props) => {
 
     const [prevIdList, setPrevIdList] = useLocalStorage("prevIdList", [])
 
-    const handleContinueWithNoId = async () => {
+    const handleContinueWithNoId =  () => {
 
         const name = prompt("I hope you are aware that your data will not sync across devices and it cannot be restored if you delete your browser memory and cookies!! \nPlease Provide Your Good Name:")
         if (name == null || name == "") return;
-        await axios.post(process.env.REACT_APP_NOIDDATA, name ? name : "unknown") 
-        localStorage.customId && localStorage.removeItem("customId")    
+        // await axios.post(process.env.REACT_APP_NOIDDATA, name ? name : "unknown") 
+        // localStorage.customId && localStorage.removeItem("customId")    
         props.setContinueWithNoId(name)   
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit =  (e) => {
         e.preventDefault();
         const pattern= "^[a-zA-Z0-9]*$";
         if(!value || !value.match(pattern) || value.length!==20){
@@ -26,7 +26,7 @@ export const UserInput = (props) => {
             return;
         }
         setPrevIdList(prevIdList => [...prevIdList, value])
-        await axios.post(process.env.REACT_APP_KRATEIDS, value)
+        // await axios.post(process.env.REACT_APP_KRATEIDS, value)
         props.setCustomId(value)
         setValue("");
     }
@@ -103,16 +103,16 @@ export const UserInput = (props) => {
                                 <li> You must provide a custom ID :</li>
                                 <ul>
                                     <li>Length must be equal to 20 - It is long to avoid the need of password while still being able to have a bit of privacy</li>
-                                    <li>Can have Uppercase and Lowercase alphabets </li>
-                                    <li>Can contain Numbers</li>
-                                    <li>No symbols, no spaces, no special characters, nothing!</li>
+                                    <li>ID should be Alphanumeric - Uppercase and Lowercase alphabets, and Numbers</li>
+                                    <li className='no_other_char'>No symbols, no spaces, no special characters, nothing!</li>
                                 </ul>
                                 <li> The sole purpose of the ID is to create and connect to a unique database</li>
                                 <li className='imp_li'> <span>Note:</span> The app remembers the ID for you but make sure to note it down just in case you would like to use the app in other device, with the same data synced 
                                     across both devices (OR) if the browser cache memory and cookies are all deleted, leading to loss of your Id</li>
-                                <li> A button is provided on the top left inside the app to Change/Enter the ID, if required (You can visit this instructions page with the same)</li> 
-                                <li> If you lose your ID, do not can contact me <a href="https://twitter.com/tobeawebdev" target="_blank" rel="noreferrer noopener">@tobeawebdev</a> on
+                                <li className='btn_provided'> A button is provided on the top left inside the app to Change/Enter the ID, if required (You can visit this instructions page with the same)</li> 
+                                <li className='lost_id'> If you lose your ID, do not can contact me <a href="https://twitter.com/tobeawebdev" target="_blank" rel="noreferrer noopener">@tobeawebdev</a> on
                                      Twitter (OR) at <a href="mailto:mohithguptak@gmail.com" target="_blank" rel="noreferrer noopener">mohithguptak@gmail.com</a>, cause I might be able to recover it </li>
+                                <li className='github_repo_link'> You can find the code in my <a href="https://github.com/mohithgupta/efficienttodoapp" target="_blank" rel="noreferrer noopener">Github Repo</a></li>
                             </ul>
                         </div>
 

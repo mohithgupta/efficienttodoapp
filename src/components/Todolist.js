@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Todolist.css"
 import axios from 'axios';
@@ -25,13 +25,25 @@ const Todolist = (props) => {
 
   const addTodo = async (text) => {
 
-    // const newTodos = [{text }, ...todos];
-    // setTodos(newTodos);
-
-    customId!=='absent' && (await axios.post(endpoint + `${props.title}`, {text, isDone:false}) )
+    if(customId!=='absent'){
+     
+      try {
+          await axios.post(endpoint + `${props.title}`, {text, isDone:false}) 
+      }
+      catch(error){
+          console.log(error)
+          alert("The API has an issue but it would be temporary. Please try again after some time or use the Continue with No ID option for now!")
+      }
+      finally{
+          fetchData()
+      }
+    }
+    else{
+      const newTodos = [{text }, ...todos];
+      setTodos(newTodos);
+    }
     console.log("Added :", text)
     
-    // customId!=='absent' && fetchData();
   };
 
   const markTodo = async (id, index, text) => {
@@ -40,44 +52,81 @@ const Todolist = (props) => {
     newTodos[index].isDone= (newTodos[index].isDone ? (newTodos[index].isDone===true ? false : true) : true);
     const bool = newTodos[index].isDone;
    
-    // setTodos(newTodos);
 
-    customId!=='absent' && (await axios.put(endpoint + `${id}`, {text, isDone:bool}) )
+    if(customId!=='absent'){
+     
+      try{
+          await axios.put(endpoint + `${id}`, {text, isDone:bool})
+      }
+      catch(error){
+          console.log(error)
+          alert("The API has an issue but it would be temporary. Please try again after some time or use the Continue with No ID option for now!")
+      }
+      finally{
+          fetchData()
+      }
+    }
+    else{
+        setTodos(newTodos);
+    }
+   
     console.log("updated :", text)
 
-    // customId!=='absent' && fetchData();
   };
 
   const removeTodo = async (id, index, text) => {
     
     
-    customId!=='absent' && (await axios.delete(endpoint + `record/${id}`) )
+    if(customId!=='absent'){
+      try {
+        await axios.delete(endpoint + `record/${id}`) 
+      }
+      catch(error){
+        console.log(error)
+        alert("The API has an issue but it would be temporary. Please try again after some time or use the Continue with No ID option for now!")
+      }
+      finally{
+        fetchData()
+      }
+    }
+    else {
+      const newTodos = [...todos];
+      newTodos.splice(index, 1);
+      setTodos(newTodos);
+    }
+
     console.log("deleted :", text)
-
-    // customId!=='absent' && fetchData();
-   
-    // const newTodos = [...todos];
-    // newTodos.splice(index, 1);
-    // setTodos(newTodos);
-
   };
 
   const fetchData = async () => {
+
+    if(customId!=='absent'){
+      try {
+        const res = await axios.get(endpoint + `${props.title}`)
+
+        if(res.status!==200) throw Error("Something's wrong")
+      
+        const data = res.data;
     
-    const res = await axios.get(endpoint + `${props.title}`)
+        data.reverse();
+    
+        setTodos(data)
 
-    if(res.status!==200) throw Error("Something's wrong")
-  
-    const data = res.data;
-
-    data.reverse();
-
-    setTodos(data)
-
-    // console.log("fetched", data)
+        console.log("fetched")
+      }
+      catch(error){
+        console.log(error)
+        alert("The API has an issue but it would be temporary. Please try again after some time or use the Continue with No ID option for now!")
+      }
+      finally{ }
+    }
   }
 
-  useInterval( () => customId!=='absent' && fetchData(), 1000)
+  // useInterval( () => customId!=='absent' && fetchData(), 1000)
+
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   return (
     <div className="app">

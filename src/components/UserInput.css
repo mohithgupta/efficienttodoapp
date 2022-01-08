@@ -20,7 +20,7 @@ ul{
     list-style-type: disc;
 }
 
-ul > li:last-of-type{
+li.no_other_char{
     list-style-type: "😤" ;
 }
 
@@ -34,20 +34,24 @@ ul.main_list{
     padding: 10px 10px 20px 30px;
 }
 
-ul.main_list > li:nth-last-of-type(2){
-    list-style-type: "😇";
-}
-
-ul.main_list > li:last-of-type{
-    list-style-type: "😈";
-}
-
 li > a{
     color:#fff;
 }
 
-li.no_id_li{
+li.btn_provided{
     list-style-type: "😇";
+}
+
+li.lost_id{
+    list-style-type: "😈";
+}
+
+li.no_id_li{
+    list-style-type: "😎";
+}
+
+li.github_repo_link{
+    list-style-type: "🥳";
 }
 
 li.imp_li{

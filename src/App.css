@@ -28,7 +28,7 @@ div.notinput{
 
 div.inputdiv{
     padding: 5px;
-    border: #000 solid 1px;
+    border: rgba(255, 255, 255, 0.2) solid 1px;
     overflow-y: auto;
 }
 
