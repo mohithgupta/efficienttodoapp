@@ -29,6 +29,7 @@ div.notinput{
 div.inputdiv{
     padding: 5px;
     border: rgba(255, 255, 255, 0.2) solid 1px;
+    overflow: visible;
     overflow-y: auto;
 }
 
@@ -127,10 +128,11 @@ div.inputdiv{
     }
     p{
         font-size: 2.8rem;
+        font-family: cursive;
+        font-weight: bold;
         position: absolute;
         top:50%;
         margin: 0 auto;
-        font-family: cursive;
         transform: translate(0,-50%);
         background: rgb(39, 51, 89, 0.4);
         border-radius: 16px;
@@ -138,7 +140,7 @@ div.inputdiv{
         backdrop-filter: blur(5px);
         -webkit-backdrop-filter: blur(5px);
         border: 1px solid rgba(0, 0, 0, 0.5);
-        color:rgb(255, 0, 0);
+        color:rgba(255, 0, 0, 0.7);
         padding: 20px ;
     }
 }

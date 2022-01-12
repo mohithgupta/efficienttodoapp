@@ -37,3 +37,18 @@
 .input_task:focus::placeholder{
     color: rgba(255, 255, 255, 0.8);
 }
+.todolist{
+    position: relative;
+}
+
+.tasks_counter{
+    color:#fff;
+    position:absolute;
+    top:1%;
+    right:0.2%;
+    border: solid 1px #fff;
+    border-radius: 50%;
+    width:20px;
+    height:20px;
+    font-size: 0.8rem;;
+}
