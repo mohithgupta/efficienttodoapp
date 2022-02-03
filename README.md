@@ -6,8 +6,8 @@ So excited to share The Efficient To-Do App, a clean, minimal app for prioritizi
 🎯 [Link to the App](https://theefficienttodoapp.netlify.app/)
 
 This To-Do App is different because:
-- ✔️ No log-in required - Just an ID and you're good to go!
-- 😇 You can even continue without an ID
+- ✔️ No log-in required - Just an ID (to sync data across your devices) and you're good to go!
+- 😇 You can even continue without an ID (no syncing across devices)
 
 - ⬜️ Attractive UI – So you can love what you are doing while finishing your prioritized tasks first
 - 📤 No Hurdles, The App remembers the ID (if provided) (OR) your choice of continuing without an ID
