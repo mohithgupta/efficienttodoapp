@@ -7,7 +7,7 @@ const flex={
   margin:"5px",
 }
 
-const FormTodo = ({ addTodo, adding }) => {
+const InputForTodo = ({ addTodo }) => {
     const [value, setValue] = useState("");
   
     const handleSubmit = e => {
@@ -23,10 +23,10 @@ const FormTodo = ({ addTodo, adding }) => {
         <Form.Control type="text" className="input_task" value={value} onChange={e => setValue(e.target.value)} placeholder="Add a new task" />
       </Form.Group>
       <Button variant="primary mb-3" className="add_btn" type="submit">
-        {adding ? "Adding..." : "Add"}
+       Add
       </Button>
     </Form>
     );
   }
 
-export default FormTodo;
+export default InputForTodo;

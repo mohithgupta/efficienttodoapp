@@ -1,4 +1,3 @@
-import React, {useState} from 'react'
 import { Button } from 'react-bootstrap';
 
 const flex={
@@ -9,38 +8,21 @@ const flex={
 
 const Todo = ({ todo, index, markTodo, removeTodo  }) => {
 
-  const [updating, setUpdating] = useState(false)
+  const handleUpdate = () => markTodo(index)
 
-  const [deleting, setDeleting] = useState(false)
+  const handleDelete = () => removeTodo(index)
 
-  const handleUpdate = async () => {
-
-    setUpdating(true)
-
-    await markTodo(todo._id, index, todo.text)
-
-    setUpdating(false)
-  }
-
-  const handleDelete = async () => {
-
-    setDeleting(true)
-
-    await removeTodo(todo._id, index, todo.text)
-
-    setDeleting(false)
-  }
-    return (
+  return (
       <div style={flex} >
         <span 
-          style={{ textDecoration: todo.isDone ? "line-through" : "", color:"#fff"}}
+          style={{ textDecoration: todo.isDone ? "line-through" : "", color: todo.isDone ? "#777" : "#fff"}}
         >
           {todo.text}
         </span>
         <div>
-          <Button className="btn" style={{margin:"3px"}} variant="outline-success" onClick={handleUpdate}>{updating ? "Updating..." : !todo.isDone ? "✓" : "Restore"}</Button>
+          <Button className="btn" style={{margin:"3px"}} variant="outline-success" onClick={handleUpdate}>{todo.isDone ? '⟳' : "✓" }</Button>
           {' '}
-          <Button className="btn" variant="outline-danger" onClick={handleDelete}>{deleting ? "Deleting..." : "✕"}</Button>
+          <Button className="btn" variant="outline-danger" onClick={handleDelete}> ✕ </Button>
         </div>
       </div>
     );

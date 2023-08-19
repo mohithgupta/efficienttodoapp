@@ -1,0 +1,28 @@
+.user_instructions_wrapperdiv{
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    background: #360033;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #066e77, #360033);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #097983, #360033); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color:rgb(255, 255, 255);
+    font-size: 1.2rem;
+}
+
+ul.main_list{
+    border: dashed #f5f5f5 2px ;
+    margin: 10px auto 0;
+    padding: 10px 10px 20px 30px;
+}
+
+li > a{
+    color:#fff;
+}
+
+li.no_id_li{
+    list-style-type: "⭐";
+}
+
+li.github_repo_link{
+    list-style-type: "🥳";
+}
